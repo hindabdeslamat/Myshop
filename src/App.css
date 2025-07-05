@@ -1,38 +1,349 @@
-.App {
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap'); 
+
+/* Global font and box-sizing for consistent sizing and reset margins/paddings */
+* {
+  font-family: 'Poppins', sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ----------- Navbar styles ----------- */
+.navbar {
+  background: linear-gradient(90deg, #6a4f9f, #7F669D);
+  padding: 1rem 3rem;
+  box-shadow: 0 6px 15px rgba(111, 84, 151, 0.3);
+  position: sticky;       /* Sticky navbar on scroll */
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-logo h2 {
+  color: #FBFACD;
+  letter-spacing: 3px;
+  user-select: none;      /* Prevent text selection */
+  cursor: default;
+}
+
+.navbar-menu {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+}
+
+.navbar-menu li a {
+  color: #FBFACD;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.2rem;
+  padding: 8px 15px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.navbar-menu li a:hover {
+  background-color: #fbfacd;
+  color: #6a4f9f;
+  box-shadow: 0 0 10px #fbfacd;
+}
+
+/* Hamburger menu for mobile */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  z-index: 110;
+}
+
+.bar {
+  width: 25px;
+  height: 3px;
+  background-color: #FBFACD;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+.bar.open:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.bar.open:nth-child(2) {
+  opacity: 0;
+}
+
+.bar.open:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* Responsive navbar for smaller screens */
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+  }
+  .navbar-menu {
+    position: fixed;
+    top: 70px;
+    right: 0;
+    background: #7F669D;
+    height: calc(100vh - 70px);
+    width: 250px;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 2rem 1.5rem;
+    gap: 20px;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    box-shadow: -3px 0 10px rgba(111, 84, 151, 0.3);
+  }
+  .navbar-menu.active {
+    transform: translateX(0);
+  }
+  .navbar-menu li a {
+    font-size: 1.4rem;
+  }
+}
+
+/* ----------- Global container for layout ----------- */
+.Global-Container {
+  display: flex;            /* Flex container to align content and cart side by side */
+  gap: 2rem;                /* Space between content and cart */
+  align-items: flex-start; 
+  justify-content: center;
+  padding: 2rem 3rem;
+  flex-wrap: nowrap;
+}
+
+/* ----------- Products container ----------- */
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Responsive columns */
+  gap: 2.5rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* ----------- Individual product card ----------- */
+.card {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 12px 20px rgba(111, 84, 151, 0.15);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  position: relative; /* to position sale badge */
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 25px 40px rgba(111, 84, 151, 0.3);
+}
+
+/* Product image */
+.image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+/* Content inside card */
+.content {
+  padding: 20px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Product title */
+.content h3 {
+  font-size: 1.1rem;
+  color: #6a4f9f;
+  font-weight: 600;
+  margin-bottom: 10px;
+  text-transform: uppercase;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Product price */
+.price {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #a68ac6;
+  margin-bottom: 15px;
+  text-align: center;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+/* Add to cart button */
+.buy {
+  align-self: center;
+  background-color: #7F669D;
+  color: white;
+  padding: 12px 35px;
+  border-radius: 50px;
+  font-weight: 700;
+  letter-spacing: 1.1px;
+  text-transform: uppercase;
+  border: none;
+  box-shadow: 0 6px 15px rgba(111, 84, 151, 0.3);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.buy:hover {
+  background-color: #a68ac6;
+  box-shadow: 0 12px 25px rgba(111, 84, 151, 0.5);
+}
+
+/* Sale badge */
+.sale-div {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background-color: #a68ac6;
+  color: white;
+  padding: 6px 14px;
+  font-weight: 700;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  z-index: 20;
+  user-select: none;
+  box-shadow: 0 0 8px rgba(166, 138, 198, 0.9);
+}
+
+/* ----------- Shopping cart styles ----------- */
+.panier {
+  background: #fff;
+  border-radius: 20px;
+  padding: 25px;
+  width: 280px;
+  box-shadow: 0 25px 40px rgba(111, 84, 151, 0.1);
+  height: fit-content;
+  position: sticky;       /* Sticky cart */
+  top: 20px;
+}
+
+.panier h3 {
+  color: #7F669D;
+  margin-bottom: 15px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.4rem;
+}
+
+.panier ul {
+  list-style: none;
+  max-height: 400px;
+  overflow-y: auto;       /* Scroll if too many items */
+  padding-right: 10px;
+}
+
+.panier li {
+  background: #f7f8fa;
+  padding: 10px 15px;
+  margin-bottom: 12px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  color: #555;
+}
+
+.panier button {
+  background-color: #a68ac6; /* violet color */
+  border: none;
+  padding: 6px 14px;
+  border-radius: 10px;
+  color: #fff;
+  cursor: pointer;
+  font-weight: 700;
+  transition: background-color 0.3s ease;
+}
+
+.panier button:hover {
+  background-color: #7F669D; /* darker violet on hover */
+}
+
+/* ----------- Global styles for the app ----------- */
+
+/* Responsive layout for smaller screens */
+@media (max-width: 900px) {
+  .Global-Container {
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: row;
+  }
+
+  .panier {
+    width: 280px;
+    position: relative;
+    top: 0;
+    max-width: none;
+    margin-top: 20px;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* ----------- Footer styles ----------- */
+.footer {
+  background-color: #7F669D;
+  color: #FBFACD;
+  padding: 20px 40px;
+  text-align: center;
+  margin-top: 40px;
+  box-shadow: 0 -4px 10px rgba(127, 102, 157, 0.4);
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  gap: 10px;
 }
 
-.App-link {
-  color: #61dafb;
+.footer-links {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+  padding: 0;
+  margin: 0;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.footer-links li a {
+  color: #FBFACD;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  font-weight: 600;
+}
+
+.footer-links li a:hover {
+  color: #a68ac6;
+}
+
+/* Responsive footer */
+@media (max-width: 600px) {
+  .footer-content {
+    flex-direction: column;
   }
-  to {
-    transform: rotate(360deg);
+  .footer-links {
+    flex-direction: column;
+    gap: 8px;
   }
 }
+/* ----------- Additional styles for specific components ----------- */

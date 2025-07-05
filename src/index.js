@@ -3,11 +3,19 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { BrowserRouter } from "react-router-dom";
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
 
+// import Exo1Ctrl from './Exo1Ctrl';
+// import Exo2Ctrl from './Exo2Ctrl';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+     <BrowserRouter>
+        <App />
+        {/* <Exo2Ctrl/> */}
+     </BrowserRouter>
+     {/* <Exo1Ctrl/> */}
   </React.StrictMode>
 );
 
